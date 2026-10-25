@@ -1,0 +1,198 @@
+{
+  "digitization": {
+    "schema_version": "1.0",
+    "booklet_id": "T001",
+    "student_id": "23D019",
+    "student_id_confidence": 0.9992,
+    "pages": 1,
+    "answers": [
+      {
+        "student_id": "23D019",
+        "question": "Q4",
+        "answer_text": "let us consider first what would appear to be the simplest case - that of flat fish on the bottom . The evidence suggest that the fish are",
+        "page": 1,
+        "confidence": 0.95,
+        "needs_review": false,
+        "flags": [],
+        "lines": [
+          {
+            "page": 1,
+            "bbox": [
+              261,
+              338,
+              1218,
+              390
+            ],
+            "text": "let us consider first what would",
+            "confidence": 0.825
+          },
+          {
+            "page": 1,
+            "bbox": [
+              263,
+              429,
+              1287,
+              496
+            ],
+            "text": "appear to be the simplest case -",
+            "confidence": 0.99
+          },
+          {
+            "page": 1,
+            "bbox": [
+              244,
+              525,
+              1242,
+              588
+            ],
+            "text": "that of flat fish on the bottom .",
+            "confidence": 0.968
+          },
+          {
+            "page": 1,
+            "bbox": [
+              272,
+              627,
+              1222,
+              690
+            ],
+            "text": "The evidence suggest that the fish are",
+            "confidence": 0.994
+          }
+        ]
+      },
+      {
+        "student_id": "23D019",
+        "question": "Q2",
+        "answer_text": "aware of the moving footrope before it' reaches them . They move away before",
+        "page": 1,
+        "confidence": 0.848,
+        "needs_review": false,
+        "flags": [],
+        "lines": [
+          {
+            "page": 1,
+            "bbox": [
+              259,
+              821,
+              1152,
+              878
+            ],
+            "text": "aware of the moving footrope before",
+            "confidence": 0.915
+          },
+          {
+            "page": 1,
+            "bbox": [
+              244,
+              901,
+              1115,
+              959
+            ],
+            "text": "it' reaches them . They move away before",
+            "confidence": 0.922
+          }
+        ]
+      },
+      {
+        "student_id": "23D019",
+        "question": "Q1",
+        "answer_text": "it , swimming at the same speed for an unknown period of time , until",
+        "page": 1,
+        "confidence": 0.956,
+        "needs_review": false,
+        "flags": [],
+        "lines": [
+          {
+            "page": 1,
+            "bbox": [
+              244,
+              1111,
+              1123,
+              1153
+            ],
+            "text": "it , swimming at the same speed",
+            "confidence": 0.975
+          },
+          {
+            "page": 1,
+            "bbox": [
+              270,
+              1195,
+              1477,
+              1264
+            ],
+            "text": "for an unknown period of time , until",
+            "confidence": 0.974
+          }
+        ]
+      },
+      {
+        "student_id": "23D019",
+        "question": "Q3",
+        "answer_text": "they become ( 1) tired , or ( 2 ) more used to the disturbance .",
+        "page": 1,
+        "confidence": 0.879,
+        "needs_review": false,
+        "flags": [],
+        "lines": [
+          {
+            "page": 1,
+            "bbox": [
+              263,
+              1398,
+              1262,
+              1447
+            ],
+            "text": "they become ( 1) tired , or ( 2 ) more used",
+            "confidence": 0.827
+          },
+          {
+            "page": 1,
+            "bbox": [
+              244,
+              1494,
+              670,
+              1537
+            ],
+            "text": "to the disturbance .",
+            "confidence": 0.988
+          }
+        ]
+      }
+    ],
+    "model": "layout+microsoft/trocr-small-handwritten",
+    "confidence_kind": "calibrated",
+    "runtime_s": 7.106
+  },
+  "analysis": {
+    "schema_version": "1.0",
+    "entities": [
+      {
+        "text": "first",
+        "label": "ORDINAL",
+        "start": 16,
+        "end": 21,
+        "answer_index": 0
+      },
+      {
+        "text": "1",
+        "label": "CARDINAL",
+        "start": 14,
+        "end": 15,
+        "answer_index": 3
+      },
+      {
+        "text": "2",
+        "label": "CARDINAL",
+        "start": 30,
+        "end": 31,
+        "answer_index": 3
+      }
+    ],
+    "figures": [],
+    "ner_enabled": true,
+    "figure_detection_enabled": true,
+    "figure_coordinate_space": "deskewed_standard_width_page"
+  }
+}

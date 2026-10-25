@@ -19,6 +19,8 @@ api = ["fastapi", "uvicorn", "python-multipart"]
 pdf = ["pypdfium2"]
 train = ["huggingface_hub", "pyarrow", "scikit-learn"]
 tesseract = ["pytesseract"]
+# The newer Windows preshed wheel overflows when deserializing trained tokenizers.
+ner = ["spacy>=3.7,<4", "preshed==3.0.10; platform_system == 'Windows'"]
 dev = ["pytest", "httpx", "fastapi", "uvicorn", "python-multipart", "scikit-learn", "matplotlib", "pypdfium2"]
 
 [project.scripts]

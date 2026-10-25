@@ -1,0 +1,9 @@
+INFO:     127.0.0.1:54424 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56250 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56250 - "GET /ui HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56250 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56250 - "POST /analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55766 - "GET /ui HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55766 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49668 - "POST /digitize HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58501 - "POST /preview HTTP/1.1" 200 OK

@@ -1,0 +1,8 @@
+# Full original research workflow. The application's dependency files are unchanged.
+-r ../requirements.txt
+pytesseract
+requests
+ipython
+
+# Optional browser demo: pip install playwright && playwright install chromium
+# Tesseract itself must be installed separately on your OS.

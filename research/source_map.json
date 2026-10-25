@@ -1,0 +1,1667 @@
+{
+  "notebook": "notebooks/snlp_group1_week7.ipynb",
+  "notebook_sha256": "2654b65e87f5aa57089441c462e1c9147f7146fab4b1e87ee99bad825f027e28",
+  "cell_numbering": "Zero-based, counting markdown and code cells",
+  "stages": [
+    {
+      "name": "00_setup",
+      "file": "stages/00_setup.py",
+      "description": "Dependency setup, configuration and random seeds"
+    },
+    {
+      "name": "01_problem_and_contract",
+      "file": "stages/01_problem_and_contract.py",
+      "description": "Architecture and output contract"
+    },
+    {
+      "name": "02_dataset",
+      "file": "stages/02_dataset.py",
+      "description": "Dataset downloads, writer matching and booklet generation"
+    },
+    {
+      "name": "03_preprocessing",
+      "file": "stages/03_preprocessing.py",
+      "description": "Page preprocessing and deskew checks"
+    },
+    {
+      "name": "04_metrics_and_baseline",
+      "file": "stages/04_metrics_and_baseline.py",
+      "description": "Evaluation metrics and Tesseract baseline"
+    },
+    {
+      "name": "05_layout",
+      "file": "stages/05_layout.py",
+      "description": "Text-line layout and margin-mark detection"
+    },
+    {
+      "name": "06_glyph_model",
+      "file": "stages/06_glyph_model.py",
+      "description": "Glyph CNN training and constrained decoders"
+    },
+    {
+      "name": "07_recognition_and_structuring",
+      "file": "stages/07_recognition_and_structuring.py",
+      "description": "TrOCR, question segmentation and development predictions"
+    },
+    {
+      "name": "08_model_comparisons",
+      "file": "stages/08_model_comparisons.py",
+      "description": "Ablations, recorded cloud responses, LLM and vision comparisons"
+    },
+    {
+      "name": "09_calibration",
+      "file": "stages/09_calibration.py",
+      "description": "Confidence calibration on development data"
+    },
+    {
+      "name": "10_test_evaluation",
+      "file": "stages/10_test_evaluation.py",
+      "description": "Frozen-test evaluation, bootstrap comparisons and plots"
+    },
+    {
+      "name": "11_line_benchmark",
+      "file": "stages/11_line_benchmark.py",
+      "description": "IAM line-level recognition benchmark"
+    },
+    {
+      "name": "12_error_analysis",
+      "file": "stages/12_error_analysis.py",
+      "description": "Component errors, error taxonomy and representative examples"
+    },
+    {
+      "name": "13_robustness",
+      "file": "stages/13_robustness.py",
+      "description": "Image perturbations and robustness experiments"
+    },
+    {
+      "name": "14_stress_tests",
+      "file": "stages/14_stress_tests.py",
+      "description": "Embedded assets, real-page examples and structural stress tests"
+    },
+    {
+      "name": "15_confidence_and_export",
+      "file": "stages/15_confidence_and_export.py",
+      "description": "Confidence evaluation, final calibration and results export"
+    },
+    {
+      "name": "16_package_generation",
+      "file": "stages/16_package_generation.py",
+      "description": "Original Week-6 package source and metadata generation"
+    },
+    {
+      "name": "17_package_tests_and_assets",
+      "file": "stages/17_package_tests_and_assets.py",
+      "description": "Original tests, trained assets and test-suite execution"
+    },
+    {
+      "name": "18_regression_api_and_cli",
+      "file": "stages/18_regression_api_and_cli.py",
+      "description": "Package regression, HTTP API and consumer examples"
+    },
+    {
+      "name": "19_package_docs",
+      "file": "stages/19_package_docs.py",
+      "description": "Original documentation and Week-6 findings"
+    },
+    {
+      "name": "20_platform_and_review_api",
+      "file": "stages/20_platform_and_review_api.py",
+      "description": "Platform architecture, Week-7 API and review UI"
+    },
+    {
+      "name": "21_partner_services",
+      "file": "stages/21_partner_services.py",
+      "description": "Guard/grader stand-ins, integration pipeline and answer key"
+    },
+    {
+      "name": "22_live_demo",
+      "file": "stages/22_live_demo.py",
+      "description": "Live integration and human-review browser demo"
+    },
+    {
+      "name": "23_marks_analysis",
+      "file": "stages/23_marks_analysis.py",
+      "description": "Effect of digitization and human review on marks"
+    },
+    {
+      "name": "24_responsible_ai",
+      "file": "stages/24_responsible_ai.py",
+      "description": "Writer fairness, hallucinations, injection and offline checks"
+    },
+    {
+      "name": "25_integration_docs_and_submission",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "description": "Integration tests, documentation, evidence and archive"
+    }
+  ],
+  "cells": [
+    {
+      "cell": 0,
+      "type": "markdown",
+      "file": "stages/00_setup.py",
+      "start_line": 8,
+      "source_sha256": "3a5cf36a3d51ea33bfc44b9542755f236960ba84f0fdd5479e819ab02809c6f8",
+      "end_line": 48
+    },
+    {
+      "cell": 1,
+      "type": "markdown",
+      "file": "stages/00_setup.py",
+      "start_line": 51,
+      "source_sha256": "c70be7ae3e92d345f65535d2ec4bdbe195d8f8dc8af34ea243d7674742e27170",
+      "end_line": 51
+    },
+    {
+      "cell": 2,
+      "type": "code",
+      "file": "stages/00_setup.py",
+      "start_line": 54,
+      "source_sha256": "838182f941638d9f1dd0fba7efb04e8e1aed8e8552d1e5282b50d2b4fdf37ed5",
+      "end_line": 69
+    },
+    {
+      "cell": 3,
+      "type": "code",
+      "file": "stages/00_setup.py",
+      "start_line": 72,
+      "source_sha256": "ca2eb07e177c7cfc9b11fe43982f6fe83db13a56c3935b238a71143a07380475",
+      "end_line": 134
+    },
+    {
+      "cell": 4,
+      "type": "markdown",
+      "file": "stages/01_problem_and_contract.py",
+      "start_line": 8,
+      "source_sha256": "d6613d4acbb9eaa11ea349f24ba7b04ee319bb981d9bcc735b4faf078a3e5386",
+      "end_line": 45
+    },
+    {
+      "cell": 5,
+      "type": "code",
+      "file": "stages/01_problem_and_contract.py",
+      "start_line": 48,
+      "source_sha256": "671cbbcfc7821ced6d610c35b173d50e65e5e9400bc6968714e804a9bb05a135",
+      "end_line": 67
+    },
+    {
+      "cell": 6,
+      "type": "code",
+      "file": "stages/01_problem_and_contract.py",
+      "start_line": 70,
+      "source_sha256": "98ae0c1ebc881a9cc3f6fbe4696642e7a03ed14e7944e07ce6ee4e35d3c22195",
+      "end_line": 86
+    },
+    {
+      "cell": 7,
+      "type": "markdown",
+      "file": "stages/02_dataset.py",
+      "start_line": 8,
+      "source_sha256": "f83d56a609ff3296e6d7e9c4036b3d2de4b95bfa12c5a936bc253d23868252bc",
+      "end_line": 24
+    },
+    {
+      "cell": 8,
+      "type": "code",
+      "file": "stages/02_dataset.py",
+      "start_line": 27,
+      "source_sha256": "e072dfce81699def3b99094b9e3ef460510b60b492ad2ecefc0719e7b42dcd5a",
+      "end_line": 41
+    },
+    {
+      "cell": 9,
+      "type": "markdown",
+      "file": "stages/02_dataset.py",
+      "start_line": 44,
+      "source_sha256": "7791899d5c96fd6fd06eea627979bdb244a41e9c19f201d411de5a91e5efcfb5",
+      "end_line": 46
+    },
+    {
+      "cell": 10,
+      "type": "code",
+      "file": "stages/02_dataset.py",
+      "start_line": 49,
+      "source_sha256": "f7ac5329fda6d5a531be41d7c619efd3eb28cceef45a96a6f10977834a1df47e",
+      "end_line": 89
+    },
+    {
+      "cell": 11,
+      "type": "markdown",
+      "file": "stages/02_dataset.py",
+      "start_line": 92,
+      "source_sha256": "08366be34d99a2a0929f380af85e154918ccf088080647c9e82628cc88d31747",
+      "end_line": 102
+    },
+    {
+      "cell": 12,
+      "type": "code",
+      "file": "stages/02_dataset.py",
+      "start_line": 105,
+      "source_sha256": "b78d555907d6a5b9af98ef46d499a1fa6342a16586e37175d13fd74af06f25fd",
+      "end_line": 205
+    },
+    {
+      "cell": 13,
+      "type": "code",
+      "file": "stages/02_dataset.py",
+      "start_line": 208,
+      "source_sha256": "c617c745e72829b7f35ca733a2195def860b7824b934fbf5f0158cfdeb211975",
+      "end_line": 331
+    },
+    {
+      "cell": 14,
+      "type": "code",
+      "file": "stages/02_dataset.py",
+      "start_line": 334,
+      "source_sha256": "f0b2e73ef9aac06932db71798f79f7411ffeb665e27fd0b3ee4799af5a333316",
+      "end_line": 357
+    },
+    {
+      "cell": 15,
+      "type": "markdown",
+      "file": "stages/02_dataset.py",
+      "start_line": 360,
+      "source_sha256": "74cea8301753410654d5eee93960581633340f6600b0ba268960143cf771438a",
+      "end_line": 364
+    },
+    {
+      "cell": 16,
+      "type": "code",
+      "file": "stages/02_dataset.py",
+      "start_line": 367,
+      "source_sha256": "040934d4d88c5839602e97784b86707269a09f48fa9fab678441ba92e48e62ac",
+      "end_line": 380
+    },
+    {
+      "cell": 17,
+      "type": "markdown",
+      "file": "stages/03_preprocessing.py",
+      "start_line": 8,
+      "source_sha256": "4ba21e274be7d2a8488c2d72ac925681067311de6de7968560586a636d8fd1de",
+      "end_line": 20
+    },
+    {
+      "cell": 18,
+      "type": "code",
+      "file": "stages/03_preprocessing.py",
+      "start_line": 23,
+      "source_sha256": "0d7f00bb4f29c61fe8630ab57f8b0f37c14abd5f1194c78a4a37db7d40aacec2",
+      "end_line": 138
+    },
+    {
+      "cell": 19,
+      "type": "code",
+      "file": "stages/03_preprocessing.py",
+      "start_line": 141,
+      "source_sha256": "2adb9a6eddd6a14a2c895e7ec6987f94d1b50986a2ea3986e394c7b75a261a2c",
+      "end_line": 150
+    },
+    {
+      "cell": 20,
+      "type": "code",
+      "file": "stages/03_preprocessing.py",
+      "start_line": 153,
+      "source_sha256": "05d9040a926e39613dc9038544327d003fd75534961eff727da793c1d26702e1",
+      "end_line": 158
+    },
+    {
+      "cell": 21,
+      "type": "markdown",
+      "file": "stages/04_metrics_and_baseline.py",
+      "start_line": 8,
+      "source_sha256": "9aeb259ac0e8d4e5ef37b44e9999369bcc06cc1c932ebda31a2e5bd1710a9d7d",
+      "end_line": 21
+    },
+    {
+      "cell": 22,
+      "type": "code",
+      "file": "stages/04_metrics_and_baseline.py",
+      "start_line": 24,
+      "source_sha256": "2fd605464a75d67c0c995a83098a38e5440ef4cf1957ede4ebb146fcdaaeb66a",
+      "end_line": 103
+    },
+    {
+      "cell": 23,
+      "type": "markdown",
+      "file": "stages/04_metrics_and_baseline.py",
+      "start_line": 106,
+      "source_sha256": "b450d7a02e8285241676e200af18da36186aab1dfaea62e06c5b1770ee636f8c",
+      "end_line": 108
+    },
+    {
+      "cell": 24,
+      "type": "code",
+      "file": "stages/04_metrics_and_baseline.py",
+      "start_line": 111,
+      "source_sha256": "2b011ffd37d84563731d97f052eba1a7591709f01d261d0de00073d4ba400a34",
+      "end_line": 172
+    },
+    {
+      "cell": 25,
+      "type": "markdown",
+      "file": "stages/05_layout.py",
+      "start_line": 8,
+      "source_sha256": "0fc0ee84b3728ec16a5be4bd8188e15cd5a87bffdefc84b38e823a0f86c8eab9",
+      "end_line": 20
+    },
+    {
+      "cell": 26,
+      "type": "code",
+      "file": "stages/05_layout.py",
+      "start_line": 23,
+      "source_sha256": "752e749052fa6cbb43b6d79e600b1d4f0c8872ecf71af4d1faeadb59dac6616d",
+      "end_line": 138
+    },
+    {
+      "cell": 27,
+      "type": "markdown",
+      "file": "stages/06_glyph_model.py",
+      "start_line": 8,
+      "source_sha256": "4f7b5d67db40abf94c7c3be8dca168194b6030deb61fb0830f603b4af97b20b1",
+      "end_line": 15
+    },
+    {
+      "cell": 28,
+      "type": "code",
+      "file": "stages/06_glyph_model.py",
+      "start_line": 18,
+      "source_sha256": "2d27bcbac64df3b8e75283d49ecb4b1e79c467c15f4a7ee9a02ece6c7b964b64",
+      "end_line": 116
+    },
+    {
+      "cell": 29,
+      "type": "code",
+      "file": "stages/06_glyph_model.py",
+      "start_line": 119,
+      "source_sha256": "fcf5526c8631c4db158a827d114e46a0922799fdc43b2f318382926226e7622d",
+      "end_line": 268
+    },
+    {
+      "cell": 30,
+      "type": "markdown",
+      "file": "stages/07_recognition_and_structuring.py",
+      "start_line": 8,
+      "source_sha256": "4e260b5696511be7eb62a20568d467d4a47e3f8105ab13d3b9d4cb1d7e843813",
+      "end_line": 12
+    },
+    {
+      "cell": 31,
+      "type": "code",
+      "file": "stages/07_recognition_and_structuring.py",
+      "start_line": 15,
+      "source_sha256": "ab956ec853c4e8f32c232261e7610b05315ecba3ab26fba9fb4f3f8bd85461e6",
+      "end_line": 61
+    },
+    {
+      "cell": 32,
+      "type": "markdown",
+      "file": "stages/07_recognition_and_structuring.py",
+      "start_line": 64,
+      "source_sha256": "e081c4d6e089e0fda659bf2443fc52a45b5d1cc8004c34affa86c70bfcad6206",
+      "end_line": 73
+    },
+    {
+      "cell": 33,
+      "type": "code",
+      "file": "stages/07_recognition_and_structuring.py",
+      "start_line": 76,
+      "source_sha256": "2eeb9176e55aa401238c2c4d0792775f82d3a4848bc7098635c7f3c61cde8af8",
+      "end_line": 154
+    },
+    {
+      "cell": 34,
+      "type": "code",
+      "file": "stages/07_recognition_and_structuring.py",
+      "start_line": 157,
+      "source_sha256": "25b89ca6b44ce5cbc79cef749044eba91bc08b0739452b2560c612f604a54963",
+      "end_line": 164
+    },
+    {
+      "cell": 35,
+      "type": "markdown",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 8,
+      "source_sha256": "9c01b53c1d8902b0b66c2fe4c44b1445debcb9f8f814046a75d40ffad6608e22",
+      "end_line": 22
+    },
+    {
+      "cell": 36,
+      "type": "code",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 25,
+      "source_sha256": "4fde5ef53966c33587e5ac1cb44b20662c042a067d3edfaa7a215133f4cf047d",
+      "end_line": 40
+    },
+    {
+      "cell": 37,
+      "type": "markdown",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 43,
+      "source_sha256": "0869c03620e59d6396edd643274d78e817af868c1e56f6034eba9fdcf7b5dff3",
+      "end_line": 45
+    },
+    {
+      "cell": 38,
+      "type": "code",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 48,
+      "source_sha256": "500dbe5595c5a801abe761125060785746cc08e113e3055e65c41d92fa1de5c9",
+      "end_line": 52
+    },
+    {
+      "cell": 39,
+      "type": "code",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 55,
+      "source_sha256": "60a019ebd4f0e755c7ebbc80ec6f738cbb8444f5430f6e54d769cfdaa23c18cf",
+      "end_line": 133
+    },
+    {
+      "cell": 40,
+      "type": "markdown",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 136,
+      "source_sha256": "468bda15f8c950828afe5824c6d42ada5268c671c647f90c74d20f0e500d8b28",
+      "end_line": 138
+    },
+    {
+      "cell": 41,
+      "type": "code",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 141,
+      "source_sha256": "b6225f18e18aa9fd0c9a86c13d463740c3caa672b4c05663d11b66f5ffa28111",
+      "end_line": 201
+    },
+    {
+      "cell": 42,
+      "type": "markdown",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 204,
+      "source_sha256": "f5bec7cb45bb6491239d614b1023dd6dc6a71af13ffdc531c2cc014d01eba7d4",
+      "end_line": 206
+    },
+    {
+      "cell": 43,
+      "type": "code",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 209,
+      "source_sha256": "1cb2fb71023266a791b67419fb6902ab754e8f1e5fb5ddc6b2ca5ad28982a0a1",
+      "end_line": 264
+    },
+    {
+      "cell": 44,
+      "type": "markdown",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 267,
+      "source_sha256": "2d35818a1c6982499eed2d2c2141dbb59e473f5f3006af4add1682f25c62a1d2",
+      "end_line": 267
+    },
+    {
+      "cell": 45,
+      "type": "code",
+      "file": "stages/08_model_comparisons.py",
+      "start_line": 270,
+      "source_sha256": "dd399cc20a8b2a4c99c1ce6cf72e21a0b2c6d5447b706d2466bd8501270c5840",
+      "end_line": 274
+    },
+    {
+      "cell": 46,
+      "type": "markdown",
+      "file": "stages/09_calibration.py",
+      "start_line": 8,
+      "source_sha256": "df26a7d4707c317152a014a1ad59f60c2121aa8d3f779705b6705208f1fd78dc",
+      "end_line": 12
+    },
+    {
+      "cell": 47,
+      "type": "code",
+      "file": "stages/09_calibration.py",
+      "start_line": 15,
+      "source_sha256": "eb79f707f59a79668643ec100f721bc738b086544c69f9b99151d77b2d72a1dd",
+      "end_line": 55
+    },
+    {
+      "cell": 48,
+      "type": "markdown",
+      "file": "stages/10_test_evaluation.py",
+      "start_line": 8,
+      "source_sha256": "4f41cc046e6b7e35022f5d6c26941c9fc29b7b0d8a4466660c930eb812328aee",
+      "end_line": 19
+    },
+    {
+      "cell": 49,
+      "type": "code",
+      "file": "stages/10_test_evaluation.py",
+      "start_line": 22,
+      "source_sha256": "430a8627332abe1445d5fd1e7ab38a4946b0e149d3cb21fa993748c822b09282",
+      "end_line": 38
+    },
+    {
+      "cell": 50,
+      "type": "code",
+      "file": "stages/10_test_evaluation.py",
+      "start_line": 41,
+      "source_sha256": "52d25530dac1f87d71936f5de67b283c45a242e349ca2a71141c6778ae8279cc",
+      "end_line": 88
+    },
+    {
+      "cell": 51,
+      "type": "code",
+      "file": "stages/10_test_evaluation.py",
+      "start_line": 91,
+      "source_sha256": "9af383eaa285d723b69a4d07a9fd7b860ea11dec686fe2975541741142a4f79d",
+      "end_line": 110
+    },
+    {
+      "cell": 52,
+      "type": "code",
+      "file": "stages/10_test_evaluation.py",
+      "start_line": 113,
+      "source_sha256": "c7b0d3b3c377d0cd9e521ea8a83f532d3442ab1418171102cfc2e10e8f7b6de4",
+      "end_line": 131
+    },
+    {
+      "cell": 53,
+      "type": "markdown",
+      "file": "stages/11_line_benchmark.py",
+      "start_line": 8,
+      "source_sha256": "79ac88a5fc5984494ecbba9f494c1ed00222a64bb7908f389ced8e1bb52cf30d",
+      "end_line": 10
+    },
+    {
+      "cell": 54,
+      "type": "code",
+      "file": "stages/11_line_benchmark.py",
+      "start_line": 13,
+      "source_sha256": "7e4b226f2ea7ad5f29c285e8f6f2e2c007a8ec1ea96360c6ae1766000624c727",
+      "end_line": 83
+    },
+    {
+      "cell": 55,
+      "type": "markdown",
+      "file": "stages/12_error_analysis.py",
+      "start_line": 8,
+      "source_sha256": "f58edcf4e5957075ed4728cac2f3e2d04c7e3ed59b9e6dd3b9fe1a7bba0fea60",
+      "end_line": 10
+    },
+    {
+      "cell": 56,
+      "type": "code",
+      "file": "stages/12_error_analysis.py",
+      "start_line": 13,
+      "source_sha256": "6a05378180b1bc22411c8b6d8e2ac56646622436a11579a792d3c1891c6cc9a7",
+      "end_line": 96
+    },
+    {
+      "cell": 57,
+      "type": "markdown",
+      "file": "stages/12_error_analysis.py",
+      "start_line": 99,
+      "source_sha256": "4481ef8af0e865d09bb7c7dc43c9742368e73482b358dd8bc5fa115c964a5f7e",
+      "end_line": 101
+    },
+    {
+      "cell": 58,
+      "type": "code",
+      "file": "stages/12_error_analysis.py",
+      "start_line": 104,
+      "source_sha256": "a60caab4b928189c46a54843c38ecf0c04e5e4e5006c672cfc3ed2a9d34c7a24",
+      "end_line": 158
+    },
+    {
+      "cell": 59,
+      "type": "code",
+      "file": "stages/12_error_analysis.py",
+      "start_line": 161,
+      "source_sha256": "1d0b7bdf9e03f979206c3f4cdee673a7169ff119be85916678f8f893f528ee95",
+      "end_line": 186
+    },
+    {
+      "cell": 60,
+      "type": "markdown",
+      "file": "stages/12_error_analysis.py",
+      "start_line": 189,
+      "source_sha256": "efa3fe4d6de0941107cb290dc78842f0544e14f953099e51fb05ee4746cf58b0",
+      "end_line": 191
+    },
+    {
+      "cell": 61,
+      "type": "code",
+      "file": "stages/12_error_analysis.py",
+      "start_line": 194,
+      "source_sha256": "3497d52cd99da21cc097fc058e30c6e8d5d238f46f7103281ba67e5a7fc72b30",
+      "end_line": 361
+    },
+    {
+      "cell": 62,
+      "type": "markdown",
+      "file": "stages/13_robustness.py",
+      "start_line": 8,
+      "source_sha256": "bf5cb623585b837d162825a91d8e81477f4a344c494790f8fd4b816136ddf21f",
+      "end_line": 10
+    },
+    {
+      "cell": 63,
+      "type": "code",
+      "file": "stages/13_robustness.py",
+      "start_line": 13,
+      "source_sha256": "b5ce8a1a1609b735c3dcb4c6c5431fa26c711b35104bed9399954228bea951b9",
+      "end_line": 72
+    },
+    {
+      "cell": 64,
+      "type": "code",
+      "file": "stages/13_robustness.py",
+      "start_line": 75,
+      "source_sha256": "b5fbdaa701d3f7da057076524abdf5e80189a9104540ab623e85ddf4b7ea22a2",
+      "end_line": 117
+    },
+    {
+      "cell": 65,
+      "type": "markdown",
+      "file": "stages/14_stress_tests.py",
+      "start_line": 8,
+      "source_sha256": "c06dcc4a1037a80ce0429050402ded89b07dabc736b358c094c29e12b7733e80",
+      "end_line": 22
+    },
+    {
+      "cell": 66,
+      "type": "code",
+      "file": "stages/14_stress_tests.py",
+      "start_line": 25,
+      "source_sha256": "eeb831d80b9ccb354bacdd5f1224b4e313d69dc443f6d0a384853f744a0ab94e",
+      "end_line": 37
+    },
+    {
+      "cell": 67,
+      "type": "code",
+      "file": "stages/14_stress_tests.py",
+      "start_line": 40,
+      "source_sha256": "3f353b8a3e1135523bf999cfb0361664631323cbb8c0a93262a65ad62ab805b0",
+      "end_line": 81
+    },
+    {
+      "cell": 68,
+      "type": "code",
+      "file": "stages/14_stress_tests.py",
+      "start_line": 84,
+      "source_sha256": "2b9664a8b8ff6e5fef1a4d4bcc5a1e8a692c8c7dfb16f04fc78d7dc713d83dc0",
+      "end_line": 121
+    },
+    {
+      "cell": 69,
+      "type": "code",
+      "file": "stages/14_stress_tests.py",
+      "start_line": 124,
+      "source_sha256": "5105dba2dd2c28a564630d47994e547ac14492f4459222c2d6cd0583261a5d43",
+      "end_line": 149
+    },
+    {
+      "cell": 70,
+      "type": "code",
+      "file": "stages/14_stress_tests.py",
+      "start_line": 152,
+      "source_sha256": "f354717d3d4ab34919d3c0ad4c5b82004ffc0baf5a37e0093af6de82362fb701",
+      "end_line": 196
+    },
+    {
+      "cell": 71,
+      "type": "markdown",
+      "file": "stages/15_confidence_and_export.py",
+      "start_line": 8,
+      "source_sha256": "7774f4f21a2247ea8262940f2f53add0558e3fda4b849ee25df2d700b731ba30",
+      "end_line": 10
+    },
+    {
+      "cell": 72,
+      "type": "code",
+      "file": "stages/15_confidence_and_export.py",
+      "start_line": 13,
+      "source_sha256": "12842e03f45c86c341da6104e5fd85c1908fc4e1316c57cdf22b2017d3897c3e",
+      "end_line": 69
+    },
+    {
+      "cell": 73,
+      "type": "markdown",
+      "file": "stages/15_confidence_and_export.py",
+      "start_line": 72,
+      "source_sha256": "f81e9aa93f35907c1f5b55a5b4e01992ae5435dca58fa3d14acf4fe14c060a6c",
+      "end_line": 99
+    },
+    {
+      "cell": 74,
+      "type": "code",
+      "file": "stages/15_confidence_and_export.py",
+      "start_line": 102,
+      "source_sha256": "0badc049b887f6821bf84389789166f0d29ffd177218a6eabf1a7ec13a43baee",
+      "end_line": 125
+    },
+    {
+      "cell": 75,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 8,
+      "source_sha256": "23a7b56aa8fcabc2cd944d7c63ef720af3659783f9c30e8b27cfc2f4a8f7e294",
+      "end_line": 47
+    },
+    {
+      "cell": 76,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 50,
+      "source_sha256": "6cbbe5c3933d853fef24fba76202560a28c2de9e7e75daa3c73c77b955686e8e",
+      "end_line": 62
+    },
+    {
+      "cell": 77,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 65,
+      "source_sha256": "8266917ae8ff325e1e4ac872a36e2284a2c366006c3b03d14443ce9280c561a3",
+      "end_line": 69
+    },
+    {
+      "cell": 78,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 72,
+      "source_sha256": "115d4d6470861337c203f6f2dbbd46a1ed3405c7320c58c1809078fece1d8fab",
+      "end_line": 72
+    },
+    {
+      "cell": 79,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 75,
+      "source_sha256": "5c81316f9163d5793368bfb983982a2ebdb3e1f5b91ae6cf500fab4d03398425",
+      "target": "src/exam_digitizer/preprocessing/page.py",
+      "resource": "file_cells/cell_079/src/exam_digitizer/preprocessing/page.py",
+      "payload_sha256": "b651af8b990e0e2ed0b5d7cc59be16d8278e7a947b7b7db216f7131f4d52330b",
+      "end_line": 76
+    },
+    {
+      "cell": 80,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 79,
+      "source_sha256": "56a0ac5512daa6667780ae05917049dbaaa7720a9e9554e67ca1f04769952d16",
+      "end_line": 79
+    },
+    {
+      "cell": 81,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 82,
+      "source_sha256": "24d219e70dffc35c76d61b1bb0f5c69f35e3e0a488056283bdf6f57cab096690",
+      "target": "src/exam_digitizer/models/layout.py",
+      "resource": "file_cells/cell_081/src/exam_digitizer/models/layout.py",
+      "payload_sha256": "94743d354278180b07b2c14ddeec16bbc18b79ac379b10102b4f6a88703aaf72",
+      "end_line": 83
+    },
+    {
+      "cell": 82,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 86,
+      "source_sha256": "9ca26ec1c957723aa779a5f19756a6cbf01894a93f43b610835b3fda2885ab92",
+      "end_line": 86
+    },
+    {
+      "cell": 83,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 89,
+      "source_sha256": "e1cd6e4f19232b02702efba486fa01aa4a87a3d602cbbe6f05cca1433c83ed65",
+      "target": "src/exam_digitizer/models/glyphs.py",
+      "resource": "file_cells/cell_083/src/exam_digitizer/models/glyphs.py",
+      "payload_sha256": "85a649c995650de934f22a31098e12b6fcd314397f40cac7d7cc7b7a253aa7a4",
+      "end_line": 90
+    },
+    {
+      "cell": 84,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 93,
+      "source_sha256": "9931542fff4b5294316a837d82d4664030e7d5f6d37fb4365d52123a7757971c",
+      "end_line": 93
+    },
+    {
+      "cell": 85,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 96,
+      "source_sha256": "25146018fdeb4c242f9abdd623b7ff8b26d977f04a691543ede9d05654f0a2e8",
+      "target": "src/exam_digitizer/models/recognition.py",
+      "resource": "file_cells/cell_085/src/exam_digitizer/models/recognition.py",
+      "payload_sha256": "f70177c542d40d50dc71505723ca34ffb51900a1f6de0c6f887e00635f70408e",
+      "end_line": 97
+    },
+    {
+      "cell": 86,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 100,
+      "source_sha256": "fec70153055776a80c2e024d06c5fea948528bab7b95e48c9e29aecfd2804173",
+      "end_line": 100
+    },
+    {
+      "cell": 87,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 103,
+      "source_sha256": "e504d6c28da89cd6ccafcb5886bdddde0054a9aaeb975bd0ac2a2da6a2c2d0a2",
+      "target": "src/exam_digitizer/models/structuring.py",
+      "resource": "file_cells/cell_087/src/exam_digitizer/models/structuring.py",
+      "payload_sha256": "54c455f7666f7beca01bd1d4183533d3b0a0ab92422f578066cd1a70331f3cf6",
+      "end_line": 104
+    },
+    {
+      "cell": 88,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 107,
+      "source_sha256": "8d185a97d80ab5ab3d785c7606dd00c9f9c4842d80e398cbccc501b640e8da33",
+      "end_line": 107
+    },
+    {
+      "cell": 89,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 110,
+      "source_sha256": "bc20e2c66749255bc81b1f75dcb92fac9d78446707fea97578958c0f462721b6",
+      "target": "src/exam_digitizer/models/confidence.py",
+      "resource": "file_cells/cell_089/src/exam_digitizer/models/confidence.py",
+      "payload_sha256": "c5ec72fe8ba330e22b40646720e2e7db7be17a2ae6a44d1f8dd76651f3c6aed4",
+      "end_line": 111
+    },
+    {
+      "cell": 90,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 114,
+      "source_sha256": "4276c93c120bcccb392ba809c1c328b5ffcb3de0b447850b1e3f7f6d475e17d7",
+      "end_line": 114
+    },
+    {
+      "cell": 91,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 117,
+      "source_sha256": "966aeeceaa135ce817a1ca624dbc19e38ae04018ccae0d9e4a5544c3e46ca5c9",
+      "target": "src/exam_digitizer/schema.py",
+      "resource": "file_cells/cell_091/src/exam_digitizer/schema.py",
+      "payload_sha256": "2245cad3037b8d32a2c564ebbe2f13606ba949779ffef0aab42853ca3a2f6387",
+      "end_line": 118
+    },
+    {
+      "cell": 92,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 121,
+      "source_sha256": "e637916c9fbf5caf998e216bdadd751e4b48c9c3fed50dc9551dcf1610e832d5",
+      "end_line": 121
+    },
+    {
+      "cell": 93,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 124,
+      "source_sha256": "d0cdb4209818e2cf9ae67e767b7397a84432a3ef45eaf3e1ed2ba7ae057bc791",
+      "target": "src/exam_digitizer/config.py",
+      "resource": "file_cells/cell_093/src/exam_digitizer/config.py",
+      "payload_sha256": "0759053e42bbad01b2e16970f0e42cb8313c9755a6b7088f4967b0bb8f6914c9",
+      "end_line": 125
+    },
+    {
+      "cell": 94,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 128,
+      "source_sha256": "30508c4137052c3847cdc06900d0c7dd75615e85460d78951171ed0b48c82d0b",
+      "end_line": 128
+    },
+    {
+      "cell": 95,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 131,
+      "source_sha256": "c9b02b9d9d84c725e2e329b54d3a6436e7e72d7dd72eed83c53a9e1b572f491d",
+      "target": "src/exam_digitizer/digitizer.py",
+      "resource": "file_cells/cell_095/src/exam_digitizer/digitizer.py",
+      "payload_sha256": "2f370e0d36e8d90db6b2850c4bf9c4354d9d4f8fcfb74e6827a6dc84813e58f3",
+      "end_line": 132
+    },
+    {
+      "cell": 96,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 135,
+      "source_sha256": "515613bc013a32ee2e96c72258baa2a0e2ed6fd4c691a6a979f7b128d60f2cef",
+      "end_line": 135
+    },
+    {
+      "cell": 97,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 138,
+      "source_sha256": "4f4fce755406d31efe9984022c769e818d9ddce1da5edc589a0fa8535da3127f",
+      "target": "src/exam_digitizer/evaluation/metrics.py",
+      "resource": "file_cells/cell_097/src/exam_digitizer/evaluation/metrics.py",
+      "payload_sha256": "44977c07e0bec81b343b203c828ddfcdd842f4ea0e26e073a550a5b4cc7363ac",
+      "end_line": 139
+    },
+    {
+      "cell": 98,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 142,
+      "source_sha256": "91231d8dcb1bc4558364523d6a95177590f1ca61ef99949765bb896e2da02c2c",
+      "end_line": 142
+    },
+    {
+      "cell": 99,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 145,
+      "source_sha256": "260853724a57fa66031c80a0dbbb2a8365c97c9107cc4640764cbe2c500b4d88",
+      "target": "src/exam_digitizer/api/app.py",
+      "resource": "file_cells/cell_099/src/exam_digitizer/api/app.py",
+      "payload_sha256": "33c9bc30038c350aa3ae1e06143fc0b2b8bd56a8d5e25ed018bdd56450eab5c4",
+      "end_line": 146
+    },
+    {
+      "cell": 100,
+      "type": "markdown",
+      "file": "stages/16_package_generation.py",
+      "start_line": 149,
+      "source_sha256": "cfb6a8987fef792b9ee67704bf68c7ccbe8d08eda601c1024261e6f8843f71b3",
+      "end_line": 149
+    },
+    {
+      "cell": 101,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 152,
+      "source_sha256": "648ebaec1d8d83b9ddb4479a27ef969e59b839844592497c5acbb770054dd392",
+      "target": "src/exam_digitizer/cli.py",
+      "resource": "file_cells/cell_101/src/exam_digitizer/cli.py",
+      "payload_sha256": "6e7a38ca32fe1ec39ed271259184108752b2b908ba94b1db0221e80771a92fdb",
+      "end_line": 153
+    },
+    {
+      "cell": 102,
+      "type": "code",
+      "file": "stages/16_package_generation.py",
+      "start_line": 156,
+      "source_sha256": "59e2ebdc6b881b1c3ffc4bf26c27bf55633373f228bc119c6a49b2e8dc187416",
+      "embedded_files": [
+        {
+          "variable": "_SMALL",
+          "target": "pyproject.toml",
+          "resource": "file_cells/cell_102/pyproject.toml",
+          "payload_sha256": "f438330c3cf372585ebdf688b3f0e89a8d0293faab9427aba652a966b28df32d"
+        },
+        {
+          "variable": "_SMALL",
+          "target": "requirements.txt",
+          "resource": "file_cells/cell_102/requirements.txt",
+          "payload_sha256": "86c3db84ea9b875ac3cfbf444c30dfe14efe10b33da8c4e83a0e930283ae987c"
+        },
+        {
+          "variable": "_SMALL",
+          "target": "src/exam_digitizer/__init__.py",
+          "resource": "file_cells/cell_102/src/exam_digitizer/__init__.py",
+          "payload_sha256": "7c6cb43c15ed4decb3a46a08a2201c22b2542c747c65a911fc367042f0681bb7"
+        },
+        {
+          "variable": "_SMALL",
+          "target": "src/exam_digitizer/preprocessing/__init__.py",
+          "resource": "file_cells/cell_102/src/exam_digitizer/preprocessing/__init__.py",
+          "payload_sha256": "8bb3529f3172056624b1e5a6a5e6ee12142e3c2b074273bce428a1ff7717a7da"
+        },
+        {
+          "variable": "_SMALL",
+          "target": "src/exam_digitizer/models/__init__.py",
+          "resource": "file_cells/cell_102/src/exam_digitizer/models/__init__.py",
+          "payload_sha256": "43fd70398f8b8a15282c431951dec526ae98f31999324740e6fabc86933337d1"
+        },
+        {
+          "variable": "_SMALL",
+          "target": "src/exam_digitizer/evaluation/__init__.py",
+          "resource": "file_cells/cell_102/src/exam_digitizer/evaluation/__init__.py",
+          "payload_sha256": "a67a5a71b293a0b54f533a7bab332b94b50fcb17934c4d80057f904423887c54"
+        },
+        {
+          "variable": "_SMALL",
+          "target": "src/exam_digitizer/api/__init__.py",
+          "resource": "file_cells/cell_102/src/exam_digitizer/api/__init__.py",
+          "payload_sha256": "a2d15ef730ffe4a2fed55f5785218afb2114bbaf64bc095f103f4e86a2551d34"
+        },
+        {
+          "variable": "_SMALL",
+          "target": "tests/__init__.py",
+          "resource": "file_cells/cell_102/tests/__init__.py",
+          "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "end_line": 169
+    },
+    {
+      "cell": 103,
+      "type": "markdown",
+      "file": "stages/17_package_tests_and_assets.py",
+      "start_line": 8,
+      "source_sha256": "3eff611a12ce34d07e376dc4118837cf6d5eef9c654b965ac216859477f7950f",
+      "end_line": 12
+    },
+    {
+      "cell": 104,
+      "type": "code",
+      "file": "stages/17_package_tests_and_assets.py",
+      "start_line": 15,
+      "source_sha256": "c660b2b3765f58794245bf6bda4c97937db2a338204edc2405331de90019f0ed",
+      "target": "tests/conftest.py",
+      "resource": "file_cells/cell_104/tests/conftest.py",
+      "payload_sha256": "63cb49e387840e7135295b6b93b6e83e3ea9e29f10b778add9f694c43d4add5a",
+      "end_line": 16
+    },
+    {
+      "cell": 105,
+      "type": "code",
+      "file": "stages/17_package_tests_and_assets.py",
+      "start_line": 19,
+      "source_sha256": "d10220e79ac645b55081fcb3eb72aa005e4438e853e78300960e0b6179ecf7b5",
+      "target": "tests/test_pipeline.py",
+      "resource": "file_cells/cell_105/tests/test_pipeline.py",
+      "payload_sha256": "d463071042b2e6085c656328d1dd27f56824ccde40416f96af887551cda059d1",
+      "end_line": 20
+    },
+    {
+      "cell": 106,
+      "type": "code",
+      "file": "stages/17_package_tests_and_assets.py",
+      "start_line": 23,
+      "source_sha256": "93bfc70bc71a9c5489f0c4d5f71df9377877759d8063fbd91d2bcf77f68cc35c",
+      "target": "tests/test_api.py",
+      "resource": "file_cells/cell_106/tests/test_api.py",
+      "payload_sha256": "921ef16f856530b788a471024d6f5360e1c2a506b38a1165efecedf59b778127",
+      "end_line": 24
+    },
+    {
+      "cell": 107,
+      "type": "code",
+      "file": "stages/17_package_tests_and_assets.py",
+      "start_line": 27,
+      "source_sha256": "914d703821342ef0e38190cf75ea3bfc1efcf26faa2a535d4a7b59af71ce1722",
+      "embedded_files": [
+        {
+          "variable": "_TESTS",
+          "target": "tests/test_metrics.py",
+          "resource": "file_cells/cell_107/tests/test_metrics.py",
+          "payload_sha256": "116f54b982a8313e912a3a4316085cae49f4d929d9ac265cc77f07e0105fa847"
+        },
+        {
+          "variable": "_TESTS",
+          "target": "tests/test_schema.py",
+          "resource": "file_cells/cell_107/tests/test_schema.py",
+          "payload_sha256": "5270688aff467c42d8f349f97166ef48e8ad24a0bf18e136299e084c6ef7c09d"
+        },
+        {
+          "variable": "_TESTS",
+          "target": "tests/test_preprocessing.py",
+          "resource": "file_cells/cell_107/tests/test_preprocessing.py",
+          "payload_sha256": "79bc6191a9b53bb7e24209fb2a98f86dca3dba9294f338b789eee9f2e1f1d429"
+        },
+        {
+          "variable": "_TESTS",
+          "target": "tests/test_layout.py",
+          "resource": "file_cells/cell_107/tests/test_layout.py",
+          "payload_sha256": "32317a2390a5835175145270ce7caf41f38d9a9f5a4fef47d08ba28bf7ba8caa"
+        },
+        {
+          "variable": "_TESTS",
+          "target": "tests/test_confidence.py",
+          "resource": "file_cells/cell_107/tests/test_confidence.py",
+          "payload_sha256": "029a1b13b76bc89b142bcde07ea827ec10349ba1e34e707384aeba567f094b88"
+        },
+        {
+          "variable": "_TESTS",
+          "target": "tests/test_glyphs.py",
+          "resource": "file_cells/cell_107/tests/test_glyphs.py",
+          "payload_sha256": "4a1918ac32dab9e4b590ac56da897e0d00fe753a4e6eb38bc16f9c946bc7d7cf"
+        }
+      ],
+      "end_line": 38
+    },
+    {
+      "cell": 108,
+      "type": "markdown",
+      "file": "stages/17_package_tests_and_assets.py",
+      "start_line": 41,
+      "source_sha256": "18a2211c3e45041f3fca1be78c6a3898069de97a1cfb82db3b8d56c47c03e82d",
+      "end_line": 44
+    },
+    {
+      "cell": 109,
+      "type": "code",
+      "file": "stages/17_package_tests_and_assets.py",
+      "start_line": 47,
+      "source_sha256": "668245741ba185811dca73368bd14045c7969bc556e8ab2159c68f91320fbe6c",
+      "end_line": 76
+    },
+    {
+      "cell": 110,
+      "type": "markdown",
+      "file": "stages/17_package_tests_and_assets.py",
+      "start_line": 79,
+      "source_sha256": "3b398bfaacf6c2498a3b2e8306607a8b949c5ba4025caf00c1b9fa1fe0d8ec93",
+      "end_line": 81
+    },
+    {
+      "cell": 111,
+      "type": "code",
+      "file": "stages/17_package_tests_and_assets.py",
+      "start_line": 84,
+      "source_sha256": "533b846eba90281c5aac9e3cdc49f94ee587d1d60a9b34c956bc18221ed3aa97",
+      "end_line": 88
+    },
+    {
+      "cell": 112,
+      "type": "markdown",
+      "file": "stages/18_regression_api_and_cli.py",
+      "start_line": 8,
+      "source_sha256": "a6b026b4044e19c51c5ef87793c22ce93a961a98c15f5a91aabedf14090a49f0",
+      "end_line": 13
+    },
+    {
+      "cell": 113,
+      "type": "code",
+      "file": "stages/18_regression_api_and_cli.py",
+      "start_line": 16,
+      "source_sha256": "2c968347bba4a4ed26a4a00db4d83c8b2488c4e905653eccaf0cc06cc6dd01ca",
+      "end_line": 76
+    },
+    {
+      "cell": 114,
+      "type": "markdown",
+      "file": "stages/18_regression_api_and_cli.py",
+      "start_line": 79,
+      "source_sha256": "26ff8f718333425471619dbace81c29a7b940643948680c61caf278d2877759f",
+      "end_line": 83
+    },
+    {
+      "cell": 115,
+      "type": "code",
+      "file": "stages/18_regression_api_and_cli.py",
+      "start_line": 86,
+      "source_sha256": "8a889999c4682d7a7f8ee874efb001c5d1eeaec104028f3cddd867370e8d0c91",
+      "end_line": 123
+    },
+    {
+      "cell": 116,
+      "type": "markdown",
+      "file": "stages/18_regression_api_and_cli.py",
+      "start_line": 126,
+      "source_sha256": "6161fda1bd9f172662e31c230cf6ed7fa575b277d20e689a633d3bfce68622a2",
+      "end_line": 129
+    },
+    {
+      "cell": 117,
+      "type": "code",
+      "file": "stages/18_regression_api_and_cli.py",
+      "start_line": 132,
+      "source_sha256": "a81c3ef9e45444e167275d9cc68a032d159d29dd34b34deadd4ad9f94bfd13d8",
+      "target": "demo/group2_consumer.py",
+      "resource": "file_cells/cell_117/demo/group2_consumer.py",
+      "payload_sha256": "dc7e790ce041c3c6d4126893e45eade35e17c854eee639f82333c33a1600b17d",
+      "end_line": 133
+    },
+    {
+      "cell": 118,
+      "type": "code",
+      "file": "stages/18_regression_api_and_cli.py",
+      "start_line": 136,
+      "source_sha256": "15c62edf3db5f27ac53fe84d5f4618db071d227afa6d95d86351a3adde840eae",
+      "end_line": 151
+    },
+    {
+      "cell": 119,
+      "type": "markdown",
+      "file": "stages/19_package_docs.py",
+      "start_line": 8,
+      "source_sha256": "e917c493078740fc0b02ee4b235b013417cffdf83acb56c6cfbb662f12bde127",
+      "end_line": 12
+    },
+    {
+      "cell": 120,
+      "type": "code",
+      "file": "stages/19_package_docs.py",
+      "start_line": 15,
+      "source_sha256": "651449559bc2169304d6c1b3c26d3cb66804204ca7b4f4ce9139701ba036e833",
+      "target": "README.md",
+      "resource": "file_cells/cell_120/README.md",
+      "payload_sha256": "61fe34c862a7c5908f2c2a8a1afa57114b3cda9c95267ec7da9928e7d17ad40d",
+      "end_line": 16
+    },
+    {
+      "cell": 121,
+      "type": "code",
+      "file": "stages/19_package_docs.py",
+      "start_line": 19,
+      "source_sha256": "a3ad775b20e40e7091e520e90f847937cb99dacc7593d5b94b4d15f0c06671e7",
+      "target": "docs/API.md",
+      "resource": "file_cells/cell_121/docs/API.md",
+      "payload_sha256": "26b9ed871f481b6dfbbf71c08d8c253a4aa11f2b34d33e51373ec6ece4b99acf",
+      "end_line": 20
+    },
+    {
+      "cell": 122,
+      "type": "code",
+      "file": "stages/19_package_docs.py",
+      "start_line": 23,
+      "source_sha256": "00c78856d1d2a466b1c4c77b3896f82c946fe42c5c722de528ed803d1bf4b5bf",
+      "target": "docs/evaluation.md",
+      "resource": "file_cells/cell_122/docs/evaluation.md",
+      "payload_sha256": "361f3f7d692f89eaa3a95954b726a6adafab8858d2506a440cf73ceb8689da20",
+      "end_line": 24
+    },
+    {
+      "cell": 123,
+      "type": "code",
+      "file": "stages/19_package_docs.py",
+      "start_line": 27,
+      "source_sha256": "81b7bec56325a98663386df36e23b9cc3fcc39e54db693cda17af5b608aca4f0",
+      "target": "demo/example_request.sh",
+      "resource": "file_cells/cell_123/demo/example_request.sh",
+      "payload_sha256": "51085cc2102165e704ccbcdd56f9c898f3dd1c686af71b15969576f662f25820",
+      "end_line": 28
+    },
+    {
+      "cell": 124,
+      "type": "code",
+      "file": "stages/19_package_docs.py",
+      "start_line": 31,
+      "source_sha256": "de318ec8f4e210054502a6b8665550fad96b115b1343a0f640c11dc4001c12a3",
+      "end_line": 35
+    },
+    {
+      "cell": 125,
+      "type": "markdown",
+      "file": "stages/19_package_docs.py",
+      "start_line": 38,
+      "source_sha256": "e739303ee8583a81ada850c5d5804c329ee84ace126ca4336cc4a328c03fcc60",
+      "end_line": 59
+    },
+    {
+      "cell": 126,
+      "type": "markdown",
+      "file": "stages/20_platform_and_review_api.py",
+      "start_line": 8,
+      "source_sha256": "bf977af02edf5c5b761cc997b5ff3d596c78e9492bb0c1125ae78c1fe1ec0c27",
+      "end_line": 39
+    },
+    {
+      "cell": 127,
+      "type": "markdown",
+      "file": "stages/20_platform_and_review_api.py",
+      "start_line": 42,
+      "source_sha256": "bc3f6246f3de6033513a771c706aca206572a4864179bea75f0b5662d039b31e",
+      "end_line": 54
+    },
+    {
+      "cell": 128,
+      "type": "code",
+      "file": "stages/20_platform_and_review_api.py",
+      "start_line": 57,
+      "source_sha256": "18d550dedd73db7cd2e539f303119c665cc73addb0b5e409a1acbae83f5692bb",
+      "end_line": 107
+    },
+    {
+      "cell": 129,
+      "type": "markdown",
+      "file": "stages/20_platform_and_review_api.py",
+      "start_line": 110,
+      "source_sha256": "4cda59c75afcebeabd5a2a59a4ce82922aa833c04953a79b1a51a22cc13455f6",
+      "end_line": 123
+    },
+    {
+      "cell": 130,
+      "type": "code",
+      "file": "stages/20_platform_and_review_api.py",
+      "start_line": 126,
+      "source_sha256": "36e72b3bb7c228d9a40b88f13058728e758e4de76d709f5ff2029158c4c873f1",
+      "target": "src/exam_digitizer/api/app.py",
+      "resource": "file_cells/cell_130/src/exam_digitizer/api/app.py",
+      "payload_sha256": "02988f52475072c608a226e2a27e5861357c839275c4686b9902bd6b2e308ebd",
+      "end_line": 127
+    },
+    {
+      "cell": 131,
+      "type": "code",
+      "file": "stages/20_platform_and_review_api.py",
+      "start_line": 130,
+      "source_sha256": "29a3d611b2d038e8f35ec30796c6ddff7c0838c932494d9eecb4de9470162365",
+      "target": "src/exam_digitizer/api/review.html",
+      "resource": "file_cells/cell_131/src/exam_digitizer/api/review.html",
+      "payload_sha256": "b549181318d4a8de35a6d7e37d484f2378768cd6a50f49e7c8ae040e1fc00856",
+      "end_line": 131
+    },
+    {
+      "cell": 132,
+      "type": "code",
+      "file": "stages/20_platform_and_review_api.py",
+      "start_line": 134,
+      "source_sha256": "acaf4489b9846b0f3c8dc9be4943e4f6c0a83c0cc39451d2d80a544af69a8f27",
+      "end_line": 141
+    },
+    {
+      "cell": 133,
+      "type": "markdown",
+      "file": "stages/21_partner_services.py",
+      "start_line": 8,
+      "source_sha256": "61304bf48a2e35aca0fde196e855fa042f347ad6bdcac7d168ce2b778e855d2b",
+      "end_line": 20
+    },
+    {
+      "cell": 134,
+      "type": "code",
+      "file": "stages/21_partner_services.py",
+      "start_line": 23,
+      "source_sha256": "6c924cf9ddbb007aea9cb3e87ee51219a611ddee5bcb0dab72a17d6dad8a09bf",
+      "target": "demo/partner_standins.py",
+      "resource": "file_cells/cell_134/demo/partner_standins.py",
+      "payload_sha256": "0bc93f900be775c5299162d548601ba902eef56270a8f77278f089d072cccaca",
+      "end_line": 24
+    },
+    {
+      "cell": 135,
+      "type": "code",
+      "file": "stages/21_partner_services.py",
+      "start_line": 27,
+      "source_sha256": "eef39ad08cc06ed5eb1ccab5c92048a4b54c7226516194b2ae82814c5e547753",
+      "target": "demo/exam_pipeline.py",
+      "resource": "file_cells/cell_135/demo/exam_pipeline.py",
+      "payload_sha256": "9f3336d3079f29eb78c5d1c5e0bc73a0eab2f1bd8b7e1eee1c22b4b6e6772e68",
+      "end_line": 28
+    },
+    {
+      "cell": 136,
+      "type": "code",
+      "file": "stages/21_partner_services.py",
+      "start_line": 31,
+      "source_sha256": "b0e32f05e389608ca21ac183d27fbb9bb0d74abc55a2fd0409e25d12f9a110d8",
+      "target": "demo/answer_key.json",
+      "resource": "file_cells/cell_136/demo/answer_key.json",
+      "payload_sha256": "9532c3c8712ff5504003027bbaf98c59b8d460eecdd08057041bd54d68b7a2a5",
+      "end_line": 32
+    },
+    {
+      "cell": 137,
+      "type": "markdown",
+      "file": "stages/22_live_demo.py",
+      "start_line": 8,
+      "source_sha256": "9a5f2e5f1c76dc2e472bbaae7695982fa827bbd94e9d689e4df3303dc2dd5398",
+      "end_line": 12
+    },
+    {
+      "cell": 138,
+      "type": "code",
+      "file": "stages/22_live_demo.py",
+      "start_line": 15,
+      "source_sha256": "ddab08932fc5f501a206290dfe1232a55e103c00d0cd3354e45b3b861cbd8983",
+      "end_line": 69
+    },
+    {
+      "cell": 139,
+      "type": "markdown",
+      "file": "stages/22_live_demo.py",
+      "start_line": 72,
+      "source_sha256": "67768fdbcf4673c84e0ad68829db1ab9726eacbf4f10e87eab6752e0c38b72a5",
+      "end_line": 78
+    },
+    {
+      "cell": 140,
+      "type": "markdown",
+      "file": "stages/22_live_demo.py",
+      "start_line": 81,
+      "source_sha256": "91eda5e121e376499db1bd7c69559d72c3f4e0b55b82de0b9aec42c6225c7f20",
+      "end_line": 83
+    },
+    {
+      "cell": 141,
+      "type": "code",
+      "file": "stages/22_live_demo.py",
+      "start_line": 86,
+      "source_sha256": "7a1c7ac24068af2d9de150a5f4e707f59f08735bf67f893883f927feee06bedf",
+      "end_line": 145
+    },
+    {
+      "cell": 142,
+      "type": "markdown",
+      "file": "stages/22_live_demo.py",
+      "start_line": 148,
+      "source_sha256": "3dc210aac66d16592d27fdb3858492f309291d4fd3a577e6e33687454fc88596",
+      "end_line": 151
+    },
+    {
+      "cell": 143,
+      "type": "markdown",
+      "file": "stages/23_marks_analysis.py",
+      "start_line": 8,
+      "source_sha256": "5b4439e291282ea02e05641910bc642d6b253449a3dc32afde36ecdab515c819",
+      "end_line": 17
+    },
+    {
+      "cell": 144,
+      "type": "code",
+      "file": "stages/23_marks_analysis.py",
+      "start_line": 20,
+      "source_sha256": "d8d3f95ca1bb6552cb5deb447e7b5a86fd933730293e198db48b2b08a528251d",
+      "end_line": 98
+    },
+    {
+      "cell": 145,
+      "type": "markdown",
+      "file": "stages/23_marks_analysis.py",
+      "start_line": 101,
+      "source_sha256": "54c283eb066ca6dbae1cce4106a7185ee87172647d2cadff90f172bc836ec78a",
+      "end_line": 118
+    },
+    {
+      "cell": 146,
+      "type": "markdown",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 8,
+      "source_sha256": "6079143658e341d9c4a9964ac889b20e4f4dced0a8f02cbbbeb340c648d62a4b",
+      "end_line": 17
+    },
+    {
+      "cell": 147,
+      "type": "code",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 20,
+      "source_sha256": "95d1d028b1d6e845d2eafa83b4cf646f687238cd69839c309a11ea3502203cfb",
+      "end_line": 83
+    },
+    {
+      "cell": 148,
+      "type": "markdown",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 86,
+      "source_sha256": "bcf4e203f21874ea308f3bd04534330425e695e7db4c47e9f04a89ac2cb3f202",
+      "end_line": 94
+    },
+    {
+      "cell": 149,
+      "type": "markdown",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 97,
+      "source_sha256": "f9635d0d8a14f4017208f1bc6b6a7c1522a6018c7903c7908ea25c81623f35ad",
+      "end_line": 102
+    },
+    {
+      "cell": 150,
+      "type": "code",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 105,
+      "source_sha256": "8f3c0f6211ea2eb16c5575ab1846385b076487727ccd6015c020342a007d08e2",
+      "end_line": 129
+    },
+    {
+      "cell": 151,
+      "type": "markdown",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 132,
+      "source_sha256": "e98220e790448b29f0c4092609357283690055d707de250e9ec2959668009c4d",
+      "end_line": 141
+    },
+    {
+      "cell": 152,
+      "type": "markdown",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 144,
+      "source_sha256": "bdc87de60ebd1aa81365b275829d13e74ebd19d49a6a8c8bea17564b0e6b299e",
+      "end_line": 148
+    },
+    {
+      "cell": 153,
+      "type": "code",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 151,
+      "source_sha256": "69abdcb04a310b0b6e1f9dc0f26daafb0bfdbbfeaf668dfa44ae80f898b22d4e",
+      "end_line": 175
+    },
+    {
+      "cell": 154,
+      "type": "markdown",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 178,
+      "source_sha256": "e6ae9d6c464107559bb0bb5dcdb5dfc5c4917a6bbacba2e8c9ed5ea3f82dcd97",
+      "end_line": 184
+    },
+    {
+      "cell": 155,
+      "type": "markdown",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 187,
+      "source_sha256": "ddf196bf1f243b6b3b72754fdb8a333bc1e31900515eedfa0ee215aaceba8eca",
+      "end_line": 198
+    },
+    {
+      "cell": 156,
+      "type": "code",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 201,
+      "source_sha256": "4591f4d6586716855e4a715d32e8f94d99433f90fa687dfed1e814207bc23b65",
+      "end_line": 212
+    },
+    {
+      "cell": 157,
+      "type": "markdown",
+      "file": "stages/24_responsible_ai.py",
+      "start_line": 215,
+      "source_sha256": "76a111344c3a63bfdf6a7dba40afbd126c84d15dd182a7e5269a7d464897dae0",
+      "end_line": 228
+    },
+    {
+      "cell": 158,
+      "type": "markdown",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "start_line": 8,
+      "source_sha256": "605c354b46d262a1c6833b3d4c367d18e86474689093f7249d56220f16ee6c4b",
+      "end_line": 14
+    },
+    {
+      "cell": 159,
+      "type": "code",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "start_line": 17,
+      "source_sha256": "765f86795779cf2e2073d76f96a8938ef84eadb9a24bdf2c0c91d3d668c6f71f",
+      "target": "tests/test_integration.py",
+      "resource": "file_cells/cell_159/tests/test_integration.py",
+      "payload_sha256": "2981823dc8d0bdb1bcb67f298b190d618f07cdf8232c7fa0fff859ad97b642b2",
+      "end_line": 18
+    },
+    {
+      "cell": 160,
+      "type": "code",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "start_line": 21,
+      "source_sha256": "5edcc39cff14e372af0d5d80e52ba96d1151ad108c09c04a50974b089b8f3e50",
+      "target": "docs/integration.md",
+      "resource": "file_cells/cell_160/docs/integration.md",
+      "payload_sha256": "90d90db5585f31104bdae02f9d94b269c58c56c795537cd3ec7cc0bb66a34307",
+      "end_line": 22
+    },
+    {
+      "cell": 161,
+      "type": "code",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "start_line": 25,
+      "source_sha256": "081c22e5465de79aad9bbc534c55cca831b768b4432b62bca77ada54d94985ee",
+      "target": "docs/responsible_ai.md",
+      "resource": "file_cells/cell_161/docs/responsible_ai.md",
+      "payload_sha256": "8cf313074781810e088e697bff0c29467313794acc7ab4798220dcb4838f05db",
+      "end_line": 26
+    },
+    {
+      "cell": 162,
+      "type": "code",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "start_line": 29,
+      "source_sha256": "341dc9a89be0ffdf3a03902154cf748da85f71e83d2a101eb3bfd20337aa0ff5",
+      "target": "docs/API.md",
+      "resource": "file_cells/cell_162/docs/API.md",
+      "payload_sha256": "64c67647fcaa7d1a8d5d18741b38892837baa317a1f23c11d43b5b169da739bd",
+      "end_line": 30
+    },
+    {
+      "cell": 163,
+      "type": "code",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "start_line": 33,
+      "source_sha256": "aace63bee6b31794a42f7c937840cf09dac20842259298c5521f3f9959909782",
+      "target": "README.md",
+      "resource": "file_cells/cell_163/README.md",
+      "payload_sha256": "a1264a623d624f9900a2c757e31045806ffe35f2d68c9cad9b98b89642eb7a05",
+      "end_line": 34
+    },
+    {
+      "cell": 164,
+      "type": "code",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "start_line": 37,
+      "source_sha256": "9e86c7f268939676152ba65b69924c825c719affed7b4fa3ef0d2056ef2b5275",
+      "end_line": 42
+    },
+    {
+      "cell": 165,
+      "type": "code",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "start_line": 45,
+      "source_sha256": "75f0fc686b21e81c4f9543c0fb58a4adc22b6935eafa1cfa49236288c2cb029a",
+      "end_line": 57
+    },
+    {
+      "cell": 166,
+      "type": "markdown",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "start_line": 60,
+      "source_sha256": "cbf13b1bcc08f616405baad69b7b93cfb1019e33a0079e71e33d12f6655b6385",
+      "end_line": 88
+    },
+    {
+      "cell": 167,
+      "type": "code",
+      "file": "stages/25_integration_docs_and_submission.py",
+      "start_line": 91,
+      "source_sha256": "19d7d690be99a691a04d56bd4788fd967d6c9001fb7137d898b30afe24dd6bed",
+      "end_line": 107
+    }
+  ],
+  "counts": {
+    "cells": 168,
+    "code_cells": 97,
+    "writefile_cells": 30,
+    "embedded_files": 14
+  }
+}

@@ -13,6 +13,20 @@ platform flow (Week 7):  scan ─► G1 /digitize ─► human review page (low 
 
 Team: J001, J002, J004, J005, J006 · Asset version 0.7.0 (Week 7) · Output schema 1.0
 
+## Python application files
+
+Use `src/exam_digitizer/` for application development and team integration. The
+application runs directly from these Python modules; no notebook or conversion
+scripts are required. Data files, saved results, sample booklets and model assets
+are retained.
+
+See **[Python file guide](docs/python_files.md)** for module responsibilities,
+integration examples and debugging guidance.
+
+Optional **[NER and figure detection](docs/enrichment.md)** add named entities and
+candidate drawing regions through a separate analysis interface, preserving the
+existing digitizer output. Figure regions require human verification.
+
 ## The "reusable asset" test — what another group needs tomorrow
 
 | | |
@@ -110,9 +124,10 @@ Placement in the platform, consumers and contracts: **[docs/integration.md](docs
 │   ├── api/app.py            FastAPI service (+ /ui, /preview, request limits)
 │   ├── api/review.html       the human-review page
 │   ├── cli.py                command line
+│   ├── enrichment/           optional NER, figure regions, analysis API and CLI
 │   └── assets/               glyph_cnn.pt · calibration.json
 ├── tests/                    pytest (unit + integration tests run without models; end-to-end + API tests need TrOCR)
-├── notebooks/                the weekly project notebook (data, experiments, evaluation, packaging, integration)
+├── data/                     original data files and source information
 ├── docs/                     API.md · integration.md · responsible_ai.md · evaluation.md · architecture.png ·
 │                             ai_university_architecture.png · review_ui.png
 ├── demo/                     sample booklet + roster + answer key · exam_pipeline.py · partner_standins.py ·
@@ -132,7 +147,7 @@ to review (accept the 70 % most confident answers automatically → 5 % unusable
 **In the platform (Week 7):** graded by a strict keyword grader, digitization costs 1.5 of 10 marks per answer with the
 default review policy (17 % of answers re-read by staff) and 0.7 at review threshold 0.8 (37 % re-read); the routed
 answers are the ones that would have lost most (5.2 marks vs 1.8) — [docs/integration.md](docs/integration.md).
-Details, error analysis and robustness: [docs/evaluation.md](docs/evaluation.md) and the notebook.
+Details, error analysis and robustness: [docs/evaluation.md](docs/evaluation.md).
 
 ## Tests
 
@@ -154,6 +169,7 @@ EXAM_DIGITIZER_SKIP_SLOW=1 pytest    # without the model tests
   and so does review (62 % vs 11 % of answers routed). Must be re-checked on real anonymised booklets.
 * Student writing is untrusted: route `answer_text` through Group 12's guard before any LLM. The API has no
   authentication — keep it on 127.0.0.1 or behind the university's SSO.
-* Known limits: English Latin-script prose only; question numbers in the left margin of a ruled answer sheet; no
-  diagrams/tables; roll-number policy `digits-exact` returns `null` rather than guessing (1 in 8 off-roster students was
+* Known limits: English Latin-script prose only; question numbers in the left margin of a ruled answer sheet; OCR
+  does not interpret diagrams/tables (optional analysis flags candidate figure regions for review); roll-number policy
+  `digits-exact` returns `null` rather than guessing (1 in 8 off-roster students was
   still mis-assigned in the stress test).

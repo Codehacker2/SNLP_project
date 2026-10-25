@@ -1,0 +1,20 @@
+{
+  "input": "demo/sample_booklet/T001_p1.png",
+  "booklet_id": "T001",
+  "student_id": "23D019",
+  "student_id_correct": true,
+  "pages": 1,
+  "answers": 4,
+  "answers_needing_review": 0,
+  "entities": 3,
+  "figure_candidates": 0,
+  "sample_metrics": {
+    "CER": 0.008645533141210375,
+    "WER": 0.02702702702702703,
+    "Seg P": 1.0,
+    "Seg R": 1.0,
+    "Seg F1": 1.0,
+    "ID acc": 1.0
+  },
+  "ocr_runtime_s": 7.106
+}

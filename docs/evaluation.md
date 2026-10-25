@@ -1,6 +1,6 @@
 # Evaluation summary (Week 5, frozen test set) and the Week-6 regression check
 
-All numbers are produced by the project notebook (`notebooks/`), on a frozen test set that was never used for tuning:
+All numbers were produced during the original notebook experiments, on a frozen test set that was never used for tuning:
 40 booklets from 40 IAM *test* writers, 61 pages, 114 answers, 354 lines. 95 % CIs are cluster bootstraps over
 booklets (1,000 resamples). Metric definitions are in `exam_digitizer.evaluation`.
 
